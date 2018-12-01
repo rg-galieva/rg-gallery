@@ -1,5 +1,5 @@
-const Thumbnail = ({src, title}) => (
-	`<figure>
+const Thumbnail = ({src, title}, className) => (
+	`<figure class="${className}">
 			<img src=${src} alt=${title} />
                 
 			<figcaption>

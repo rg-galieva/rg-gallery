@@ -4,6 +4,8 @@ import {fetchImagesForDogs} from '../../services/imageService/imageService';
 
 import Thumbnail from '../thumbnail/Thumbnail';
 
+import styles from './gallery.css';
+
 
 const initGallery = (galleryNodeId) => ({
   init: async () => {
@@ -30,7 +32,7 @@ const initGallery = (galleryNodeId) => ({
           title: 'Title'
         };
 
-        galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic))
+        galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage))
       }
 
       error.unmount();
