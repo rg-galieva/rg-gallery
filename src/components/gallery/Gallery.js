@@ -1,19 +1,19 @@
 import AppError from '../appError/AppError';
 import logger from '../logger/logger';
-import {fetchImagesForDogs} from '../../services/imageService/imageService';
+import { fetchImagesForDogs } from '../../services/imageService/imageService';
 
 import Thumbnail from '../thumbnail/Thumbnail';
 
 import styles from './gallery.css';
 
 
-const initGallery = (galleryNodeId) => ({
+const initGallery = galleryNodeId => ({
   init: async () => {
     let galleryNode = document.getElementById(galleryNodeId);
 
     // create gallery wrapper if for some reason a node is missing
     if (!galleryNode) {
-      galleryNode = document.createElement("section");
+      galleryNode = document.createElement('section');
       galleryNode.setAttribute('id', galleryNodeId);
       document.getElementById('content').insertAdjacentElement('afterbegin', galleryNode);
     }
@@ -25,14 +25,14 @@ const initGallery = (galleryNodeId) => ({
       galleryNode.classList.add('is-loading');
       const imageList = await fetchImagesForDogs();
 
-      for (let image of imageList) {
+      for (const image of imageList) {
         const pic = {
           src: image.image,
           fullImg: image.source,
-          title: 'Title'
+          title: 'Title',
         };
 
-        galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage))
+        galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage));
       }
 
       error.unmount();
@@ -42,7 +42,7 @@ const initGallery = (galleryNodeId) => ({
     } finally {
       galleryNode.classList.remove('is-loading');
     }
-  }
+  },
 });
 
 const Gallery = (galleryNodeId) => {

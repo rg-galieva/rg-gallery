@@ -1,14 +1,14 @@
 export const clearStorage = () => {
-	window.localStorage.clear();
-	window.sessionStorage.clear();
+  window.localStorage.clear();
+  window.sessionStorage.clear();
 };
 
 export const saveImages = (images) => {
-	const savedImages = window.sessionStorage.getItem('images');
+  const savedImages = window.sessionStorage.getItem('images');
 
-	if (!savedImages) {
-		window.sessionStorage.setItem('images', images);
-	} else {
-		// ToDo: merge? Depends on images data format
-	}
-}
+  if (!savedImages) {
+    window.sessionStorage.setItem('images', images);
+  } else {
+    // ToDo: merge? Depends on images data format
+  }
+};
