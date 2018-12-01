@@ -1,12 +1,14 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = function () {
 	return {
 		context: path.resolve(__dirname, './../../'),
 
 		entry: {
-			app: ["@babel/polyfill", './src/app.js'],
+			app: ["@babel/polyfill", './src/App.js'],
 		},
 
 		module: {
@@ -18,7 +20,11 @@ module.exports = function () {
 				},
 				{
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader']
+          use: [
+            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            'css-loader',
+            'postcss-loader',
+          ]
 				},
 				{
 					test: /\.svg$/,
@@ -57,6 +63,10 @@ module.exports = function () {
 				title: 'Asana Pets',
 				template: `${__dirname}/template.html`
 			}),
+      new MiniCssExtractPlugin({
+        filename: devMode ? '[name].css' : '[name].styles.[contenthash].css',
+        chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
+      })
 		],
 	};
 };
