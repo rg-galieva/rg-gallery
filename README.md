@@ -1,5 +1,8 @@
 # Asana WebDev Take-Home Exercise
 
+## Browser support
+IE Edge, Firefox, Chrome, Safari, iOS Safari, Chrome for Android
+
 ## Instructions
 
 Let's pretend that Asana is actually a pet adoption agency. (Our SF office is so dog-friendly that it's not too far a stretch!) We need a web page that contains an image gallery of the pets we have available for adoption. We'd like you to build it.
