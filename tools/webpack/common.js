@@ -22,7 +22,14 @@ module.exports = function () {
 					test: /\.css$/,
           use: [
             devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: '[local]_[hash:base64:5]',
+                importLoaders: 1
+              }
+            },
             'postcss-loader',
           ]
 				},
