@@ -1,7 +1,7 @@
 {
   "name": "rg-gallery",
   "version": "0.1.0",
-  "main": "src/App.js",
+  "main": "src/app/App.js",
   "author": "Regina Galieva",
   "license": "MIT",
   "repository": {

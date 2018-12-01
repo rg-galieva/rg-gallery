@@ -1,4 +1,4 @@
-import Gallery from './components/gallery/Gallery';
+import Gallery from '../components/gallery/Gallery';
 import './app.css';
 
 window.onerror = (message, url, line, col, error) => {
