@@ -1,17 +1,15 @@
 import Gallery from './components/gallery/Gallery';
 import './app.css';
 
-window.onerror = function (message, url, line, col, error) {
-	console.error('[App Uncaught Global Error: ]', `${message}\n At ${line}:${col} of ${url}`, error);
+window.onerror = (message, url, line, col, error) => {
+  console.error('[App Uncaught Global Error: ]', `${message}\n At ${line}:${col} of ${url}`, error);
 };
 
-(function () {
-	try {
-		console.info(["Hello world!"]);
-
-		const gallery = Gallery('gallery');
-		gallery.init();
-	} catch (e) {
-
-	}
-})();
+(function App() {
+  try {
+    const gallery = Gallery('gallery');
+    gallery.init();
+  } catch (e) {
+    console.error('[App Global Error: ]', e);
+  }
+}());
