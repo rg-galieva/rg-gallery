@@ -1,74 +1,62 @@
-import AppError from '../appError/AppError';
+import { cloneTemplate, getNode } from '../../helpers/domHelper';
+import { openLightbox, closeLightbox } from './lightbox.helper';
 import logger from '../logger/logger';
 
-const ERROR_ID = 'initLightboxError';
 
-const initLightbox = ({ galleryNodeId, openLightboxcallback, closeLightboxCallBack }) => ({
+const initLightbox = ({
+  galleryId, overlayId, openLightboxCallback, closeLightboxCallback,
+}) => ({
   init: () => {
-    const error = AppError(ERROR_ID, 'Gallery is not initialized');
-    const galleryNode = document.getElementById(galleryNodeId);
+    try {
+      const galleryNode = getNode(`#${galleryId}`);
+      if (!galleryNode) return;
 
-    if (!galleryNode) {
-      logger('Lightbox init: no galleryNode');
-      error.init();
-      return;
-    }
+      const lightboxNode = cloneTemplate('#lightbox', `#${overlayId}`);
+      if (!lightboxNode) return;
 
-    galleryNode.addEventListener('click', openLightboxcallback);
-
-    if ('content' in document.createElement('template')) {
-      const lightboxTemplate = document.querySelector('#lightbox');
-      const lightboxTemplateCopy = document.importNode(lightboxTemplate.content, true);
-
-      const lightboxNode = document.getElementById('overlay');
-      lightboxNode.appendChild(lightboxTemplateCopy);
+      galleryNode.addEventListener('click', openLightboxCallback);
 
       const closeBtn = lightboxNode.querySelector('#lightboxClose');
-      closeBtn.addEventListener('click', closeLightboxCallBack);
-    } else {
-      // ToDo: support older browsers
-      logger('AppError initError: template tag - support older browsers');
+      closeBtn.addEventListener('click', closeLightboxCallback);
+    } catch (e) {
+      logger('initLightbox', e);
     }
   },
 });
 
-// ToDo: remove closeLightboxCallBack listener
-const unmountLightbox = ({ galleryNodeId, openLightboxcallback }) => ({
+
+const unmountLightbox = ({
+  galleryId, overlayId, openLightboxCallback, closeLightboxCallback,
+}) => ({
   unmount: () => {
-    const error = AppError(ERROR_ID, 'Gallery is not initialized');
-    const galleryNode = document.getElementById(galleryNodeId);
+    try {
+      const galleryNode = getNode(`#${galleryId}`);
 
-    if (!galleryNode) {
-      logger('Lightbox init: no galleryNode');
-      error.init();
-      return;
+      if (galleryNode) {
+        galleryNode.removeEventListener('click', openLightboxCallback);
+      }
+
+      const lightboxNode = getNode(`#${overlayId}`);
+      if (!lightboxNode) return;
+
+      const closeBtn = lightboxNode.querySelector('#lightboxClose');
+
+      if (closeBtn) {
+        closeBtn.removeEventListener('click', closeLightboxCallback);
+      }
+    } catch (e) {
+      logger('unmountLightbox', e);
     }
-
-    galleryNode.removeEventListener('click', openLightboxcallback);
   },
 });
 
-const openFullImage = (ev = {}) => {
-  const fullImgSrc = ev.target && ev.target.src;
-  if (!fullImgSrc) return;
-
-  const lightboxNode = document.getElementById('overlay');
-  lightboxNode.classList.remove('is-hidden');
-  const img = lightboxNode.querySelector('img');
-  img.src = fullImgSrc;
-};
-
-const closeLightbox = () => {
-  const lightboxNode = document.getElementById('overlay');
-  lightboxNode.classList.add('is-hidden');
-};
-
-const Lightbox = (galleryNodeId, wrapperId) => {
+const Lightbox = (galleryId = 'gallery', loaderId = 'content', overlayId = 'overlay') => {
   const state = {
-    galleryNodeId,
-    wrapperId,
-    openLightboxcallback: openFullImage,
-    closeLightboxCallBack: closeLightbox,
+    galleryId,
+    loaderId,
+    overlayId,
+    openLightboxCallback: openLightbox(overlayId),
+    closeLightboxCallback: closeLightbox(overlayId),
   };
 
   return Object.assign(
