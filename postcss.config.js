@@ -5,5 +5,6 @@ module.exports = {
     require('postcss-nesting'),
     require('postcss-apply'),
     require('postcss-custom-media'),
+    require('postcss-import')
   ],
 };

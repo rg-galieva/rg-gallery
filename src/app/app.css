@@ -1,6 +1,5 @@
 @import "./themeVariables.css";
 
-
 body {
   background: #edf1f2 url("../../assets/svg/bgPattern.svg") 0 35px repeat fixed;
 }
@@ -22,12 +21,34 @@ button {
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
-  background: var(--c_overlay_bg);
-  color: var(--c_overlay_text);
+  background: var(--c-overlay-bg);
+  color: var(--c-overlay-text);
   z-index: var(--z-modal);
 
   & button:hover {
     opacity: .7;
+  }
+}
+
+@media (max-width: 599px) {
+  .global-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .global-header-title {
+    margin: 0;
+    height: 20px;
+  }
+
+  .global-footer-quote-wrapper {
+    display: none;
+  }
+
+  .global-footer-honor {
+    padding-right: 0;
+    text-align: center;
   }
 }
 

@@ -24,7 +24,7 @@
 
   & > img {
     padding: var(--content-margin);
-    background-color: var(--c_alt);
+    background-color: var(--c-alt);
     height: inherit;
     max-width: 100%;
     border: 6px solid var(--c-emph);

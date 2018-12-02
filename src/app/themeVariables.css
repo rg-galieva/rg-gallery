@@ -1,42 +1,23 @@
 :root {
   --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-serif: Georgia, serif;
-  --color-secondary: #333;
-  --color-link: #635ac7;
 
-
-  --c_overlay_bg: rgba(0, 0, 0, .9);
-  --c_overlay_text: #fff;
-  --c_txt: #333;
-  --c_alt: #fff;
+  /* COLORS */
+  --c-overlay-bg: rgba(0, 0, 0, .9);
+  --c-overlay-text: #fff;
+  --c-txt: #333;
+  --c-alt: #fff;
   --c-emph: #ff6c31;
   --c-placeholder: #ccc;
   --c-dark: #222b37;
 
 
-  /* COLORS */
-  --c_bg: #222;
-
-  --c_link: #f7f7f7;
-  --c_link_vis: #a1a1a1;
-  --c_thead: rgb(49, 49, 49);
-  --c_sub: #efeaea;
-  --c_like: #fe536d;
-  --c_obj: #b88b58;
-  --c_main: #3c69de;
-
-  /*  TYPOGRAPHY */
-  --f_size: 16;
-  --f_regular: 400;
-  --f_bold: 700;
-
-  /* GRID */
-  --w_max: 1600;
-  @custom-media --w_phone_only (max-width: 599px);
-  @custom-media --w_tablet_portrait_up (min-width: 600px);
-  @custom-media --w_tablet_landscape_up (min-width: 900px);
-  @custom-media --w_desktop_up (min-width: 1200px);
-  @custom-media --w_big_desktop_up (min-width: 1800px);
+  /* MEDIA QUERIES */
+  --w-phone-only: 599px;
+  --w-tablet-portrait-up: 600px;
+  --w-tablet-landscape-up: 900px;
+  --w-desktop-up: 1200px;
+  --w-big-desktop-up: 1800px;
 
   /* Z-INDEX */
   --z-layout: 90;
