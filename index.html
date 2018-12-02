@@ -27,6 +27,8 @@
             --header-height: 76px;
             --footer-height: 74px;
             --content-margin: 20px;
+            --c-emph: #ff6c31;
+            --z-layout: 90;
         }
 
         /* Vital set of styles. Deliver as fast as possible. */
@@ -56,7 +58,7 @@
         /* Global Header */
         .global-header-wrapper {
             width: 100%;
-            z-index: 100;
+            z-index: var(--z-layout);
             padding: 20px 16px;
             height: var(--header-height);
             background: #fff;
@@ -99,7 +101,7 @@
             position: relative;
             padding: var(--content-margin);
             margin: var(--content-margin);
-            border-top: 4px solid #ff6c31;
+            border-top: 4px solid var(--c-emph);
             background: rgba(255, 255, 255, .8);
         }
 
@@ -152,12 +154,12 @@
 
         .global-footer-quote {
             position: relative;
-            z-index: 100;
+            z-index: var(--z-layout);
         }
 
         .global-footer-quote blockquote {
             border: 4px solid;
-            color: #ff6c31;
+            color: var(--c-emph);
             text-align: center;
             background: white;
             font-family: monospace;
@@ -300,8 +302,20 @@
             <p class="global-error-text"></p>
         </div>
     </template>
+
+    <template id="lightbox">
+        <button class="lightbox-close"></button>
+
+        <div id="lightboxFullImg" class="lightbox-full-img">
+            <img src="#" alt="#" />
+        </div>
+
+        <button class="lightbox-prev"></button>
+        <button class="lightbox-next"></button>
+    </template>
 </div>
 
+<div id="overlay" class="overlay is-hidden"></div>
 <script async type="text/javascript" src="/assets/app.build.js"></script>
 </body>
 </html>

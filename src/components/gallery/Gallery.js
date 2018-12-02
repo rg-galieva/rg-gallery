@@ -4,7 +4,7 @@ import { fetchImagesForDogs } from '../../services/imageService/imageService';
 
 import Thumbnail from '../thumbnail/Thumbnail';
 
-import styles from './gallery.css';
+import styles from './gallery.pcss';
 
 
 const initGallery = (galleryNodeId, wrapperId) => ({

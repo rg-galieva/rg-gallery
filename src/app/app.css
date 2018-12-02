@@ -1,17 +1,87 @@
-/* Globals */
-:root {
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-serif: Georgia, serif;
-  --color-secondary: #333;
-  --color-link: #635ac7;
-  --text-color: #333;
-  --bg-color: #edf1f2;
+@import "./themeVariables.css";
 
-  font-family: var(--font-sans);
-  font-weight: normal;
-  line-height: 1.5;
-}
 
 body {
   background: #edf1f2 url("../../assets/svg/bgPattern.svg") 0 35px repeat;
+}
+
+button {
+  border: none;
+}
+
+.overlay {
+  &.is-hidden {
+    display: none;
+  }
+
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  background: var(--c_overlay_bg);
+  color: var(--c_overlay_text);
+  z-index: var(--z-modal);
+
+  & button:hover {
+    opacity: .7;
+  }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  width: 3rem; height: 3rem;
+  background: url("../../assets/svg/close.svg") no-repeat;
+  z-index: var(--z-modal);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.lightbox-full-img {
+  width: 100%;
+  height: 100%;
+  max-width: 80vw;
+  max-height: 80vh;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+
+
+  & > img {
+    padding: var(--content-margin);
+    background-color: var(--c_alt);
+    height: inherit;
+    max-width: 100%;
+    border: 6px solid var(--c-emph);
+    object-fit: cover;
+  }
+}
+
+.lightbox-next,
+.lightbox-prev {
+  position: absolute;
+  cursor: pointer;
+  width: 5vw;
+  top: 0; bottom: 0;
+  background: url("../../assets/svg/back.svg") center center no-repeat;
+
+  &:hover {
+    background-color: var(--c_bg);
+  }
+}
+
+.lightbox-next {
+  right: 0;
+  padding-right: 1rem;
+  transform: rotate(180deg);
+}
+
+.lightbox-prev {
+  left: 0;
+  padding-left: 1rem;
 }

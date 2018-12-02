@@ -19,7 +19,7 @@ module.exports = function () {
 					loader: 'babel-loader',
 				},
 				{
-					test: /\.css$/,
+					test: /\.pcss$/,
           use: [
             devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
@@ -30,6 +30,14 @@ module.exports = function () {
                 importLoaders: 1
               }
             },
+            'postcss-loader',
+          ]
+				},
+				{
+					test: /\.css$/,
+          use: [
+            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            { loader: 'css-loader', options: { importLoaders: 1 } },
             'postcss-loader',
           ]
 				},
