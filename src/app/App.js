@@ -1,4 +1,4 @@
-import Gallery from './components/gallery/Gallery';
+import Gallery from '../components/gallery/Gallery';
 import './app.css';
 
 window.onerror = (message, url, line, col, error) => {
@@ -7,7 +7,7 @@ window.onerror = (message, url, line, col, error) => {
 
 (function App() {
   try {
-    const gallery = Gallery('gallery');
+    const gallery = Gallery('gallery', 'content');
     gallery.init();
   } catch (e) {
     console.error('[App Global Error: ]', e);
