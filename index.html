@@ -23,6 +23,12 @@
     <meta name="twitter:card" content="link to the image">
 
     <style>
+        :root {
+            --header-height: 76px;
+            --footer-height: 74px;
+            --content-margin: 20px;
+        }
+
         /* Vital set of styles. Deliver as fast as possible. */
         * {
             box-sizing: border-box;
@@ -52,6 +58,7 @@
             width: 100%;
             z-index: 100;
             padding: 20px 16px;
+            height: var(--header-height);
             background: #fff;
         }
 
@@ -66,7 +73,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            height: 40px;
+            height: 36px;
             width: 115px;
         }
 
@@ -78,17 +85,30 @@
         .content-wrapper {
             flex: 1 0 auto;
             width: 100%;
-            max-width: 1140px;
-            min-width: 280px;
-            margin: 20px auto;
-            background: rgba(255, 255, 255, .8);
-            border-top: 4px solid #ff6c31;
+            max-width: 1180px;
+            min-width: 320px;
+            margin: 0 auto;
+        }
+
+        .is-loading .content {
+            max-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--content-margin)*2);
+            overflow: hidden;
         }
 
         .content {
             position: relative;
+            padding: var(--content-margin);
+            margin: var(--content-margin);
+            border-top: 4px solid #ff6c31;
+            background: rgba(255, 255, 255, .8);
+        }
 
-            padding: 20px;
+        .content::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: var(--content-margin);
+            background-color: white;
         }
 
         /* Global Footer */
@@ -96,7 +116,9 @@
             flex-shrink: 0;
             background-color: #222b37;
             font-size: 12px;
-            padding: 10px 16px;
+            padding: 20px 16px;
+            line-height: 14px;
+            height: var(--footer-height);
         }
 
         .global-footer p,
@@ -109,7 +131,7 @@
             width: 100%;
             max-width: 1140px;
             min-width: 280px;
-            margin: 20px auto;
+            margin: 10px auto;
         }
 
         .global-footer-honor {
@@ -148,6 +170,24 @@
             float: right;
             width: 44px;
         }
+
+        /* Gallery */
+        .gallery {
+            display: flex;
+            flex-flow: row wrap;
+            align-content: space-between;
+            justify-content: flex-start;
+            margin-right: -1rem;
+        }
+
+        .gallery > div {
+            position: relative;
+            width: calc((100% - 4rem)/4);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+            height: 12rem;
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -179,9 +219,32 @@
         </div>
     </header>
 
-    <main id="content" class="content-wrapper">
+    <main id="content" class="content-wrapper is-loading">
         <div class="content">
-            <section id="gallery"></section>
+            <section id="gallery" class="gallery">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </section>
         </div>
     </main>
 
@@ -192,8 +255,7 @@
                 <div class="global-footer-quote">
                     <blockquote>
                         <p>A dog will teach you unconditional love. If you can have that in your life, things won't be
-                            too
-                            bad.</p>
+                            too bad.</p>
 
                         <cite>&mdash;Robert Wagner</cite>
                     </blockquote>
