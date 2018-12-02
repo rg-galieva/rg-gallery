@@ -1,4 +1,5 @@
 import Gallery from '../components/gallery/Gallery';
+import Lightbox from '../components/lightbox/Lightbox';
 import './app.css';
 
 window.onerror = (message, url, line, col, error) => {
@@ -9,6 +10,9 @@ window.onerror = (message, url, line, col, error) => {
   try {
     const gallery = Gallery('gallery', 'content');
     gallery.init();
+
+    const lightbox = Lightbox('gallery');
+    lightbox.init();
   } catch (e) {
     console.error('[App Global Error: ]', e);
   }

@@ -4,7 +4,7 @@ import { fetchImagesForDogs } from '../../services/imageService/imageService';
 
 import Thumbnail from '../thumbnail/Thumbnail';
 
-import styles from './gallery.css';
+import styles from './gallery.pcss';
 
 
 const initGallery = (galleryNodeId, wrapperId) => ({
@@ -27,15 +27,16 @@ const initGallery = (galleryNodeId, wrapperId) => ({
       const imageList = await fetchImagesForDogs();
       galleryNode.innerHTML = null;
 
-      for (const image of imageList) {
+      imageList.forEach((image, index) => {
         const pic = {
+          id: index,
           src: image.image,
           fullImg: image.source,
           title: 'Title',
         };
 
         galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage));
-      }
+      });
 
       error.unmount();
     } catch (e) {
