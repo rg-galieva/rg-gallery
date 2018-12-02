@@ -8,7 +8,7 @@
   margin: 0 auto;
   overflow: hidden;
   text-align: center;
-  background-color: var(--c_alt);
-  color: var(--c_txt);
+  background-color: var(--c-alt);
+  color: var(--c-txt);
   border: 6px solid var(--c-emph);
 }
