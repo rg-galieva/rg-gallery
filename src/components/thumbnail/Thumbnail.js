@@ -1,5 +1,5 @@
-const Thumbnail = ({ src, title }, className) => (
-  `<div class="${className}">
+const Thumbnail = ({ id, src, title }, className) => (
+  `<div class="${className}" data-id="${id}">
      <img src=${src} alt=${title} />
   </div>`
 );
