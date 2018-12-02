@@ -3,10 +3,11 @@ import {
   openLightbox,
   closeLightbox,
   handlePrevNextClick,
-  DEFAULT_SETTINGS,
+  LIGHTBOX_DEFAULT_SETTINGS,
 } from './lightbox.helper';
 import logger from '../logger/logger';
 
+import './lightbox.css';
 
 const initLightbox = (props) => {
   const {
@@ -91,7 +92,7 @@ const unmountLightbox = (props) => {
 };
 
 
-const Lightbox = (settings = DEFAULT_SETTINGS) => {
+const Lightbox = (settings = LIGHTBOX_DEFAULT_SETTINGS) => {
   const { selectors } = settings;
 
   const {

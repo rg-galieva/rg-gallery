@@ -1,0 +1,14 @@
+@import "../../app/themeVariables.css";
+
+.global-error {
+  width: 100%;
+  height: 100%;
+  max-width: 40vw;
+  max-height: 40vh;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+  background-color: var(--c_alt);
+  color: var(--c_txt);
+  border: 6px solid var(--c-emph);
+}

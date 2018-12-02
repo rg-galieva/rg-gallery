@@ -29,6 +29,9 @@
             --content-margin: 20px;
             --c-emph: #ff6c31;
             --z-layout: 90;
+            --c-placeholder: #ccc;
+            --c-dark: #222b37;
+            --c_alt: #fff;
         }
 
         /* Vital set of styles. Deliver as fast as possible. */
@@ -61,7 +64,7 @@
             z-index: var(--z-layout);
             padding: 20px 16px;
             height: var(--header-height);
-            background: #fff;
+            background: var(--c_alt);
         }
 
         .global-header {
@@ -93,7 +96,7 @@
         }
 
         .is-loading .content {
-            max-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--content-margin)*2);
+            max-height: calc(100vh - var(--header-height) - var(--footer-height) - var(--content-margin) * 2);
             overflow: hidden;
         }
 
@@ -108,15 +111,17 @@
         .content::after {
             content: '';
             position: absolute;
-            left: 0; right: 0; bottom: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             height: var(--content-margin);
-            background-color: white;
+            background-color: var(--c_alt);
         }
 
         /* Global Footer */
         .global-footer {
             flex-shrink: 0;
-            background-color: #222b37;
+            background-color: var(--c-dark);
             font-size: 12px;
             padding: 20px 16px;
             line-height: 14px;
@@ -137,12 +142,12 @@
         }
 
         .global-footer-honor {
-            color: #fff;
+            color: var(--c_alt);
             padding-right: 300px;
         }
 
         .global-footer-honor a {
-            color: #fff;
+            color: var(--c_alt);
         }
 
         .global-footer-quote-wrapper {
@@ -184,11 +189,11 @@
 
         .gallery > div {
             position: relative;
-            width: calc((100% - 4rem)/4);
+            width: calc((100% - 4rem) / 4);
             margin-right: 1rem;
             margin-bottom: 1rem;
             height: 12rem;
-            background-color: #ccc;
+            background-color: var(--c-placeholder);
         }
     </style>
 </head>
@@ -297,9 +302,11 @@
 
     <!-- TEMPLATES -->
     <template id="globalError">
-        <div class="global-error">
-            <h1>Sorry, something went wrong</h1>
-            <p class="global-error-text"></p>
+        <div class="overlay">
+            <div class="global-error">
+                <h1>Sorry, something went wrong</h1>
+                <p class="global-error-text"></p>
+            </div>
         </div>
     </template>
 
@@ -307,7 +314,7 @@
         <button id="lightboxClose" class="lightbox-close"></button>
 
         <div class="lightbox-full-img">
-            <img id="lightboxFullImg" src="#" alt="#" />
+            <img id="lightboxFullImg" src="#" alt="#"/>
         </div>
 
         <button id="lightboxPrev" class="lightbox-prev"></button>

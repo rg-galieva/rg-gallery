@@ -1,13 +1,13 @@
+import { cloneTemplate } from '../../helpers/domHelper';
 import logger from '../logger/logger';
+
+import './appError.css';
 
 const initError = ({ id, message, settings: { templateId } = {} }) => ({
   init: () => {
-    if ('content' in document.createElement('template')) {
-      const errorTemplate = document.querySelector(`#${templateId}`);
-      const errorTemplateCopy = document.importNode(errorTemplate.content, true);
+    try {
+      const errorNode = cloneTemplate(`#${templateId}`);
 
-      const errorNode = document.createElement('div');
-      errorNode.appendChild(errorTemplateCopy);
       errorNode.setAttribute('id', id);
       errorNode.setAttribute('data-type', 'error');
 
@@ -17,9 +17,8 @@ const initError = ({ id, message, settings: { templateId } = {} }) => ({
       }
 
       document.body.appendChild(errorNode);
-    } else {
-      // ToDo: support older browsers
-      logger('AppError initError: template tag - support older browsers');
+    } catch (e) {
+      logger('initError', e);
     }
   },
 });
@@ -33,7 +32,7 @@ const unmountError = id => ({
       document.body.removeChild(errorNode);
     } catch (e) {
       // ToDo: throw an Error and handle it in a caller function. For now simply log and continue
-      logger('AppError unmountError', e);
+      logger('unmountError', e);
     }
   },
 });

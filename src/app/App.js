@@ -1,6 +1,7 @@
 import Gallery from '../components/gallery/Gallery';
 import Lightbox from '../components/lightbox/Lightbox';
-import { DEFAULT_SETTINGS } from '../components/lightbox/lightbox.helper';
+import { LIGHTBOX_DEFAULT_SETTINGS } from '../components/lightbox/lightbox.helper';
+import { GALLERY_DEFAULT_SETTINGS } from '../components/gallery/gallery.helper';
 import './app.css';
 
 window.onerror = (message, url, line, col, error) => {
@@ -9,10 +10,10 @@ window.onerror = (message, url, line, col, error) => {
 
 (function App() {
   try {
-    const gallery = Gallery('gallery', 'content');
+    const gallery = Gallery(GALLERY_DEFAULT_SETTINGS);
     gallery.init();
 
-    const lightbox = Lightbox(DEFAULT_SETTINGS);
+    const lightbox = Lightbox(LIGHTBOX_DEFAULT_SETTINGS);
     lightbox.init();
   } catch (e) {
     console.error('[App Global Error: ]', e);

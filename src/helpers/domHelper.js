@@ -7,7 +7,10 @@ export const cloneTemplate = (templateSelector, parentSelector) => {
       const template = document.querySelector(templateSelector);
       const templateCopy = document.importNode(template.content, true);
 
-      const parentNode = document.querySelector(parentSelector);
+      const parentNode = parentSelector
+        ? document.querySelector(parentSelector)
+        : document.createElement('div');
+
       parentNode.appendChild(templateCopy);
 
       return parentNode;
