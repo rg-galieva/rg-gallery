@@ -41,5 +41,14 @@ button {
     margin: 0;
     height: 20px;
   }
+
+  .global-footer-quote-wrapper {
+    display: none;
+  }
+
+  .global-footer-honor {
+    padding-right: 0;
+    text-align: center;
+  }
 }
 
