@@ -1,5 +1,10 @@
 import { cloneTemplate, getNode } from '../../helpers/domHelper';
-import { openLightbox, closeLightbox, DEFAULT_SETTINGS } from './lightbox.helper';
+import {
+  openLightbox,
+  closeLightbox,
+  handlePrevNextClick,
+  DEFAULT_SETTINGS,
+} from './lightbox.helper';
 import logger from '../logger/logger';
 
 
@@ -10,9 +15,13 @@ const initLightbox = (props) => {
       gallery,
       overlay,
       closeBtn,
+      prevBtn,
+      nextBtn,
     } = {},
     openLightboxCallback,
     closeLightboxCallback,
+    prevClickCallback,
+    nextClickCallback,
   } = props;
 
   return {
@@ -28,6 +37,12 @@ const initLightbox = (props) => {
 
         const closeBtnNode = lightboxNode.querySelector(closeBtn);
         closeBtnNode.addEventListener('click', closeLightboxCallback);
+
+        const prevBtnNode = lightboxNode.querySelector(prevBtn);
+        prevBtnNode.addEventListener('click', prevClickCallback);
+
+        const nextBtnNode = lightboxNode.querySelector(nextBtn);
+        nextBtnNode.addEventListener('click', nextClickCallback);
       } catch (e) {
         logger('initLightbox', e);
       }
@@ -42,28 +57,32 @@ const unmountLightbox = (props) => {
       gallery,
       overlay,
       closeBtn,
+      prevBtn,
+      nextBtn,
     } = {},
     openLightboxCallback,
     closeLightboxCallback,
+    prevClickCallback,
+    nextClickCallback,
   } = props;
 
   return {
     unmount: () => {
       try {
         const galleryNode = getNode(gallery);
-
-        if (galleryNode) {
-          galleryNode.removeEventListener('click', openLightboxCallback);
-        }
+        if (galleryNode) galleryNode.removeEventListener('click', openLightboxCallback);
 
         const lightboxNode = getNode(overlay);
         if (!lightboxNode) return;
 
         const closeBtnNode = lightboxNode.querySelector(closeBtn);
+        if (closeBtnNode) closeBtnNode.removeEventListener('click', closeLightboxCallback);
 
-        if (closeBtnNode) {
-          closeBtnNode.removeEventListener('click', closeLightboxCallback);
-        }
+        const prevBtnNode = lightboxNode.querySelector(prevBtn);
+        if (prevBtnNode) prevBtnNode.removeEventListener('click', prevClickCallback);
+
+        const nextBtnNode = lightboxNode.querySelector(nextBtn);
+        if (nextBtnNode) nextBtnNode.removeEventListener('click', nextClickCallback);
       } catch (e) {
         logger('unmountLightbox', e);
       }
@@ -73,12 +92,19 @@ const unmountLightbox = (props) => {
 
 
 const Lightbox = (settings = DEFAULT_SETTINGS) => {
-  const { selectors, selectors: { overlay } } = settings;
+  const { selectors } = settings;
+
+  const {
+    overlay,
+    lightboxImg,
+  } = selectors;
 
   const props = {
     selectors,
-    openLightboxCallback: openLightbox(overlay),
+    openLightboxCallback: openLightbox(overlay, lightboxImg),
     closeLightboxCallback: closeLightbox(overlay),
+    prevClickCallback: handlePrevNextClick(lightboxImg, true),
+    nextClickCallback: handlePrevNextClick(lightboxImg, false),
   };
 
   return Object.assign(
