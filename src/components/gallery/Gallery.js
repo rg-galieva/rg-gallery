@@ -27,15 +27,16 @@ const initGallery = (galleryNodeId, wrapperId) => ({
       const imageList = await fetchImagesForDogs();
       galleryNode.innerHTML = null;
 
-      for (const image of imageList) {
+      imageList.forEach((image, index) => {
         const pic = {
+          id: index,
           src: image.image,
           fullImg: image.source,
           title: 'Title',
         };
 
         galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage));
-      }
+      });
 
       error.unmount();
     } catch (e) {
