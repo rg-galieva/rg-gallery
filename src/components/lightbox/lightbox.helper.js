@@ -1,7 +1,7 @@
 import { getNode } from '../../helpers/domHelper';
 import logger from '../logger/logger';
 
-export const DEFAULT_SETTINGS = {
+export const LIGHTBOX_DEFAULT_SETTINGS = {
   selectors: {
     template: '#lightbox',
     gallery: '#gallery',
