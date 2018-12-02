@@ -1,8 +1,7 @@
 const Thumbnail = ({ src, title }, className) => (
-  `<figure class="${className}">
+  `<div class="${className}">
      <img src=${src} alt=${title} />
-     <figcaption>${title}</figcaption>
-  </figure>`
+  </div>`
 );
 
 export default Thumbnail;

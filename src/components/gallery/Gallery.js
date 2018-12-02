@@ -7,9 +7,10 @@ import Thumbnail from '../thumbnail/Thumbnail';
 import styles from './gallery.css';
 
 
-const initGallery = galleryNodeId => ({
+const initGallery = (galleryNodeId, wrapperId) => ({
   init: async () => {
     let galleryNode = document.getElementById(galleryNodeId);
+    const wrapperNode = document.getElementById(wrapperId);
 
     // create gallery wrapper if for some reason a node is missing
     if (!galleryNode) {
@@ -22,8 +23,9 @@ const initGallery = galleryNodeId => ({
     const error = AppError(ERROR_ID, 'No available images');
 
     try {
-      galleryNode.classList.add('is-loading');
+      if (wrapperNode) wrapperNode.classList.add('is-loading');
       const imageList = await fetchImagesForDogs();
+      galleryNode.innerHTML = null;
 
       for (const image of imageList) {
         const pic = {
@@ -40,17 +42,18 @@ const initGallery = galleryNodeId => ({
       logger('Gallery initGallery', e);
       error.init();
     } finally {
-      galleryNode.classList.remove('is-loading');
+      if (wrapperNode) wrapperNode.classList.remove('is-loading');
     }
   },
 });
 
-const Gallery = (galleryNodeId) => {
+const Gallery = (galleryNodeId, wrapperId) => {
   const state = {
     galleryNodeId,
+    wrapperId,
   };
 
-  return Object.assign(state, initGallery(galleryNodeId));
+  return Object.assign(state, initGallery(galleryNodeId, wrapperId));
 };
 
 
