@@ -50,6 +50,10 @@ module.exports = function () {
           from: resolve(__dirname, './../deployFiles/'),
           to: './',
         },
+        {
+          from: resolve(__dirname, './../../assets/images/'),
+          to: './assets/images/'
+        },
       ])
     ],
   });

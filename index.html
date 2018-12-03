@@ -195,7 +195,7 @@
             width: calc((100% - 4rem) / 4);
             margin-right: 1rem;
             margin-bottom: 1rem;
-            height: 12rem;
+            height: 200px;
             background-color: var(--c-placeholder);
         }
     </style>
@@ -229,28 +229,7 @@
 
     <main id="content" class="content-wrapper is-loading">
         <div class="content">
-            <section id="gallery" class="gallery">
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-                <div class="gallery-placeholder"></div>
-            </section>
+            <section id="gallery" class="gallery"></section>
         </div>
     </main>
 
@@ -322,6 +301,38 @@
 </div>
 
 <div id="overlay" class="overlay is-hidden"></div>
+
+<script>
+  (function init() {
+    const content = document.getElementById('content');
+    if (!content) {
+      throw new Error('Vital element with id content is missing');
+    }
+    const contentWidth = content.offsetWidth;
+    const contentHeight = content.offsetHeight;
+
+    const getNumberOfImagesInARow = (contentWidth) => {
+      if (contentWidth > 1499) return 6;
+      if (contentWidth < 420) return 1;
+      if (contentWidth < 799) return 2;
+      return 4;
+    };
+
+    const imagesPerRow = getNumberOfImagesInARow(contentWidth);
+    const rows = Math.floor(contentHeight / 200);
+    const images = imagesPerRow * rows;
+
+    const gallery = document.getElementById('gallery');
+    gallery.setAttribute('data-images', images);
+
+    for (let i = 0; i < images; i++) {
+        const placeholder = document.createElement('div');
+        placeholder.classList.add('gallery-placeholder');
+        placeholder.setAttribute('data-id', i.toString());
+        gallery.insertAdjacentElement('beforeend', placeholder);
+    }
+  }());
+</script>
 <script async type="text/javascript" src="/assets/app.build.js"></script>
 </body>
 </html>

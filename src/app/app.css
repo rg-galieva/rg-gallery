@@ -52,3 +52,22 @@ button {
   }
 }
 
+.btn {
+  display: block;
+  border: 2px solid var(--c-emph);
+  padding: 5px 10px;
+  line-height: 14px;
+  font-size: 12px;
+  color: var(--c-emph);
+
+  &:hover {
+    color: var(--c-alt);
+    background: var(--c-emph);;
+  }
+}
+
+.content .btn {
+  margin: 5px auto;
+  cursor: pointer;
+}
+

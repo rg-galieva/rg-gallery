@@ -9,7 +9,14 @@ import imagesJson from '../../../assets/data/dogs';
 const fetchImagesForDogs = () => new Promise((resolve, reject) => {
   try {
     const images = imagesJson.dogs;
-    resolve(images);
+
+    let overweightResponse = [...images];
+
+    for (let i = 0; i < 200; i++) {
+      overweightResponse = overweightResponse.concat(images);
+    }
+
+    resolve(overweightResponse);
   } catch (e) {
     reject(e);
   }
