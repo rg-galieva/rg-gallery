@@ -23,13 +23,13 @@
 }
 
 .gallery > div,
-.galleryImage {
+.gallery-image {
   display: flex;
   align-content: center;
   width: var(--galleryImageWidth);
   margin-right: 1rem;
   margin-bottom: 1rem;
-  height: 12rem;
+  height: 200px;
   background-color: var(--c-placeholder);
   overflow: hidden;
 

@@ -1,7 +1,5 @@
-const Thumbnail = ({ id, src, title }, className) => (
-  `<div class="${className}">
-     <img src="${src}" alt="${title}" data-id="${id}"/>
-  </div>`
+const Thumbnail = ({ id, src, title }) => (
+  `<img src="${src}" alt="${title}" data-id="${id}"/>`
 );
 
 export default Thumbnail;

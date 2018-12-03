@@ -1,13 +1,16 @@
 import AppError from '../appError/AppError';
 import logger from '../logger/logger';
 import { getNode } from '../../helpers/domHelper';
-import { GALLERY_ERROR_SETTINGS, GALLERY_DEFAULT_SETTINGS } from './gallery.helper';
+import {
+  GALLERY_ERROR_SETTINGS,
+  GALLERY_DEFAULT_SETTINGS,
+  loadImages,
+
+} from './gallery.helper';
 
 import { fetchImagesForDogs } from '../../services/imageService/imageService';
 
-import Thumbnail from '../thumbnail/Thumbnail';
-
-import styles from './gallery.pcss';
+import './gallery.css';
 
 
 const initGallery = (props) => {
@@ -16,6 +19,7 @@ const initGallery = (props) => {
       gallery,
       galleryParent,
     } = {},
+    loadImagesCallback,
   } = props;
 
   return {
@@ -27,7 +31,8 @@ const initGallery = (props) => {
       if (!galleryNode) {
         galleryNode = document.createElement('section');
         galleryNode.setAttribute('id', gallery.replace(/\W/g, ''));
-        document.getElementById('content').insertAdjacentElement('afterbegin', galleryNode);
+        document.getElementById('content')
+          .insertAdjacentElement('afterbegin', galleryNode);
       }
 
       const error = AppError(GALLERY_ERROR_SETTINGS.id, GALLERY_ERROR_SETTINGS.message);
@@ -35,18 +40,17 @@ const initGallery = (props) => {
       try {
         if (wrapperNode) wrapperNode.classList.add('is-loading');
         const imageList = await fetchImagesForDogs();
-        galleryNode.innerHTML = null;
 
-        imageList.forEach((image, index) => {
-          const pic = {
-            id: index,
-            src: image.image,
-            fullImg: image.source,
-            title: '',
-          };
+        const numberOfImagesPerPage = galleryNode.getAttribute('data-images');
 
-          galleryNode.insertAdjacentHTML('beforeend', Thumbnail(pic, styles.galleryImage));
-        });
+        loadImagesCallback(galleryNode, imageList, numberOfImagesPerPage, 0);
+
+        let loadMoreButton = document.createElement('button');
+        loadMoreButton.classList.add('btn');
+        loadMoreButton.innerText = 'Load more';
+        loadMoreButton = galleryNode.insertAdjacentElement('afterend', loadMoreButton);
+
+        loadMoreButton.addEventListener('click', () => loadImagesCallback(galleryNode, imageList, numberOfImagesPerPage));
 
         error.unmount();
       } catch (e) {
@@ -64,6 +68,7 @@ const Gallery = (settings = GALLERY_DEFAULT_SETTINGS) => {
 
   const props = {
     selectors,
+    loadImagesCallback: loadImages,
   };
 
   return Object.assign(props, initGallery(props));
