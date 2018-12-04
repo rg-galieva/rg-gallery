@@ -4,6 +4,7 @@ const webpackMerge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const commonConfig = require('./common.js');
 
 const PUBLIC_PATH = '/';
@@ -19,15 +20,24 @@ module.exports = function () {
     },
     optimization: {
       minimizer: [
-        new OptimizeCSSAssetsPlugin({})
+        new OptimizeCSSAssetsPlugin({}),
+        new UglifyJSPlugin({
+          sourceMap: true,
+          uglifyOptions: {
+            compress: {
+              inline: false
+            }
+          }
+        })
       ],
-      runtimeChunk: 'single',
+      runtimeChunk: false,
       splitChunks: {
         cacheGroups: {
           vendor: {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
-            chunks: 'all'
+            chunks: 'all',
+            minChunks: 2
           },
           styles: {
             name: 'styles',

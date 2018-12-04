@@ -75,7 +75,7 @@ module.exports = function () {
 
 		plugins: [
 			new HtmlWebpackPlugin({
-				title: 'Asana Pets',
+				title: 'Doggy Gallery',
 				template: `${__dirname}/template.html`
 			}),
       new MiniCssExtractPlugin({
