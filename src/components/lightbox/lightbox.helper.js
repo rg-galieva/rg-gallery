@@ -14,6 +14,13 @@ export const LIGHTBOX_DEFAULT_SETTINGS = {
   },
 };
 
+export const getLightboxControlNodes = (lightboxNode, closeBtn, prevBtn, nextBtn) => ({
+  closeBtnNode: lightboxNode.querySelector(closeBtn),
+  prevBtnNode: lightboxNode.querySelector(prevBtn),
+  nextBtnNode: lightboxNode.querySelector(nextBtn),
+});
+
+
 export const updateLightboxImg = (lightboxImgSelector, fullImgSrc, activeId) => {
   try {
     const lightboxImg = getNode(lightboxImgSelector);
