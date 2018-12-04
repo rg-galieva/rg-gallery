@@ -16,7 +16,7 @@
     "lint:fix": "./node_modules/.bin/eslint . --fix"
   },
   "keywords": [
-    "gallery"
+    "gallery", "lightbox"
   ],
   "devDependencies": {
     "@babel/core": "^7.1.6",

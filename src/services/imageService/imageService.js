@@ -4,6 +4,7 @@ import imagesJson from '../../../assets/data/dogs';
 /*
  ToDo: if other categories are required, update a layout to support multiple sections.
  For this task we are working with dogs only.
+ In a real app use fetch/axios with query params related to the image size determined by device.
 */
 
 const fetchImagesForDogs = () => new Promise((resolve, reject) => {

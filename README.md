@@ -1,9 +1,38 @@
-# Asana WebDev Take-Home Exercise
+## Dog Friendly Gallery with Lightbox
 
-## Browser support
-IE Edge, Firefox, Chrome, Safari, iOS Safari, Chrome for Android
+### Tech stack: 
+- Core: JS, CSS
+- Tools: Webpack, Eslint, Babel, PostCss, SVGO
+- Deploy: Surge.sh
 
-## Instructions
+### Components
+- Responsive gallery with a fixed number of images per load
+- Lightbox: previous, next, close buttons
+- 'Load more' images button. A number of images per load depend on width, a height of available space and grid rules.
+- UI Error messages modal to inform about a crash of vital app's components (AppError)
+
+#### Getting started
+```
+$ npm i
+// install all dependencies
+```
+```
+$ npm run dev
+// start development with webpack-dev-server
+```
+
+### ToDo
+- IE Edge: create a fallback for object-fit property
+- Lightbox buttons are not responsive
+- Support window resize event and adjust UI accordingly
+- Add animations for overlay, lightbox and loading images
+
+#### Wishlist
+Images should be served from a server that supports optimization and resizing. 
+Client should request a specific set of images (dims, compression, etc.) based on device info.
+
+
+### Requirements
 
 Let's pretend that Asana is actually a pet adoption agency. (Our SF office is so dog-friendly that it's not too far a stretch!) We need a web page that contains an image gallery of the pets we have available for adoption. We'd like you to build it.
 
