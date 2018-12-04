@@ -3,6 +3,7 @@ import {
   openLightbox,
   closeLightbox,
   handlePrevNextClick,
+  getLightboxControlNodes,
   LIGHTBOX_DEFAULT_SETTINGS,
 } from './lightbox.helper';
 import logger from '../logger/logger';
@@ -36,13 +37,14 @@ const initLightbox = (props) => {
 
         galleryNode.addEventListener('click', openLightboxCallback);
 
-        const closeBtnNode = lightboxNode.querySelector(closeBtn);
+        const {
+          closeBtnNode,
+          prevBtnNode,
+          nextBtnNode,
+        } = getLightboxControlNodes(lightboxNode, closeBtn, prevBtn, nextBtn);
+
         closeBtnNode.addEventListener('click', closeLightboxCallback);
-
-        const prevBtnNode = lightboxNode.querySelector(prevBtn);
         prevBtnNode.addEventListener('click', prevClickCallback);
-
-        const nextBtnNode = lightboxNode.querySelector(nextBtn);
         nextBtnNode.addEventListener('click', nextClickCallback);
       } catch (e) {
         logger('initLightbox', e);
@@ -76,13 +78,14 @@ const unmountLightbox = (props) => {
         const lightboxNode = getNode(overlay);
         if (!lightboxNode) return;
 
-        const closeBtnNode = lightboxNode.querySelector(closeBtn);
+        const {
+          closeBtnNode,
+          prevBtnNode,
+          nextBtnNode,
+        } = getLightboxControlNodes(lightboxNode, closeBtn, prevBtn, nextBtn);
+
         if (closeBtnNode) closeBtnNode.removeEventListener('click', closeLightboxCallback);
-
-        const prevBtnNode = lightboxNode.querySelector(prevBtn);
         if (prevBtnNode) prevBtnNode.removeEventListener('click', prevClickCallback);
-
-        const nextBtnNode = lightboxNode.querySelector(nextBtn);
         if (nextBtnNode) nextBtnNode.removeEventListener('click', nextClickCallback);
       } catch (e) {
         logger('unmountLightbox', e);

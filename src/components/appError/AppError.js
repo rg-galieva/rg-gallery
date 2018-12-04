@@ -3,8 +3,8 @@ import logger from '../logger/logger';
 
 import './appError.css';
 
-const initError = ({ id, message, settings: { templateId } = {} }) => ({
-  init: () => {
+const showError = ({ id, message, settings: { templateId } = {} }) => ({
+  show: () => {
     try {
       const errorNode = cloneTemplate(`#${templateId}`);
 
@@ -18,13 +18,13 @@ const initError = ({ id, message, settings: { templateId } = {} }) => ({
 
       document.body.appendChild(errorNode);
     } catch (e) {
-      logger('initError', e);
+      logger('showError', e);
     }
   },
 });
 
-const unmountError = id => ({
-  unmount: () => {
+const removeError = id => ({
+  remove: () => {
     try {
       const errorNode = document.getElementById(id);
       if (!errorNode) return;
@@ -32,7 +32,7 @@ const unmountError = id => ({
       document.body.removeChild(errorNode);
     } catch (e) {
       // ToDo: throw an Error and handle it in a caller function. For now simply log and continue
-      logger('unmountError', e);
+      logger('removeError', e);
     }
   },
 });
@@ -66,8 +66,8 @@ const AppError = (id, message, settings = DEFAULT_SETTINGS) => {
 
   return Object.assign(
     state,
-    initError(state),
-    unmountError(id),
+    showError(state),
+    removeError(id),
     clearAllErrors(),
   );
 };

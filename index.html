@@ -296,12 +296,16 @@
     const gallery = document.getElementById('gallery');
     gallery.setAttribute('data-images', images);
 
+    const placeholders = document.createElement('div');
+
     for (let i = 0; i < images; i++) {
       const placeholder = document.createElement('div');
       placeholder.classList.add('gallery-placeholder');
       placeholder.setAttribute('data-id', i.toString());
-      gallery.insertAdjacentElement('beforeend', placeholder);
+      placeholders.insertAdjacentElement('beforeend', placeholder);
     }
+
+    gallery.insertAdjacentHTML('beforeend', placeholders.innerHTML);
   }());
 </script>
 <script async type="text/javascript" src="/assets/app.build.js"></script>

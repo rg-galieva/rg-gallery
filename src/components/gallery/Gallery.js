@@ -52,10 +52,10 @@ const initGallery = (props) => {
 
         loadMoreButton.addEventListener('click', () => loadImagesCallback(galleryNode, imageList, numberOfImagesPerPage));
 
-        error.unmount();
+        error.remove();
       } catch (e) {
         logger('initGallery', e);
-        error.init();
+        error.show();
       } finally {
         if (wrapperNode) wrapperNode.classList.remove('is-loading');
       }
