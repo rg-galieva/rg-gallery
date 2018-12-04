@@ -37,6 +37,7 @@ export const openLightbox = (lightboxSelector, lightboxImgSelector) => (ev = {})
     if (!lightboxNode) return;
 
     lightboxNode.classList.remove('is-hidden');
+    document.body.classList.add('no-scroll');
 
     updateLightboxImg(lightboxImgSelector, fullImgSrc, activeId);
   } catch (e) {
@@ -47,25 +48,41 @@ export const openLightbox = (lightboxSelector, lightboxImgSelector) => (ev = {})
 export const closeLightbox = overlaySelector => () => {
   try {
     const lightboxNode = getNode(overlaySelector);
+    document.body.classList.remove('no-scroll');
     lightboxNode.classList.add('is-hidden');
   } catch (e) {
     logger('closeLightbox: ', e);
   }
 };
 
-// ToDo: decide what to show if prev image is unavailable
-export const handlePrevNextClick = (lightboxImgSelector, isPrev) => () => {
+export const getFirstAndLastImageId = (gallerySelector) => {
+  try {
+    const visibleImages = document.querySelectorAll(`${gallerySelector} [data-id]`);
+    if (!visibleImages) return null;
+
+    return {
+      firstId: Number(visibleImages[0].dataset.id),
+      lastId: Number(visibleImages[visibleImages.length - 1].dataset.id),
+    };
+  } catch (e) {
+    logger('getFirstAndLastImageId', e);
+    return null;
+  }
+};
+
+
+export const handlePrevNextClick = (lightboxImgSelector, gallerySelector, isPrev) => () => {
   try {
     const lightboxImgNode = getNode(lightboxImgSelector);
-    const prevActiveId = lightboxImgNode.getAttribute('data-id');
+    const prevActiveId = Number(lightboxImgNode.getAttribute('data-id'));
+    const { firstId, lastId } = getFirstAndLastImageId(gallerySelector);
 
     let activeId;
 
     if (isPrev) {
-      if (prevActiveId < 1) return;
-      activeId = +prevActiveId - 1;
+      activeId = prevActiveId <= firstId ? lastId : prevActiveId - 1;
     } else {
-      activeId = +prevActiveId + 1;
+      activeId = prevActiveId >= lastId ? firstId : prevActiveId + 1;
     }
 
     const newImg = getNode(`[data-id="${activeId}"]`);

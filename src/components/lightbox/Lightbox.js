@@ -98,14 +98,15 @@ const Lightbox = (settings = LIGHTBOX_DEFAULT_SETTINGS) => {
   const {
     overlay,
     lightboxImg,
+    gallery,
   } = selectors;
 
   const props = {
     selectors,
     openLightboxCallback: openLightbox(overlay, lightboxImg),
     closeLightboxCallback: closeLightbox(overlay),
-    prevClickCallback: handlePrevNextClick(lightboxImg, true),
-    nextClickCallback: handlePrevNextClick(lightboxImg, false),
+    prevClickCallback: handlePrevNextClick(lightboxImg, gallery, true),
+    nextClickCallback: handlePrevNextClick(lightboxImg, gallery, false),
   };
 
   return Object.assign(
