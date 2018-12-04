@@ -9,6 +9,11 @@ button {
   outline: none;
 }
 
+.no-scroll {
+  height: 100%;
+  overflow: hidden;
+}
+
 .overlay {
   &.is-hidden {
     display: none;
