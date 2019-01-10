@@ -37,6 +37,10 @@ export const openLightbox = (lightboxSelector, lightboxImgSelector) => (ev = {})
   try {
     if (!ev.target) return;
 
+    if (ev.target.tagName !== 'IMG') {
+      return;
+    }
+
     const fullImgSrc = ev.target.src;
     const activeId = ev.target.getAttribute('data-id');
 
